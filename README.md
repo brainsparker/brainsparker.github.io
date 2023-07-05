@@ -1,2 +1,2 @@
 # brainsparker.github.io
-Personal website of Brian sparker
+Personal website of Brian Sparker
