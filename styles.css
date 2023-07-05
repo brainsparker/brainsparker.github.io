@@ -39,8 +39,7 @@ a {
 /* Header styles */
 
 header {
-  background-color: #2e3d49;
-  color: #fff;
+  background-color: #f7f7f7;
   padding: 20px 0;
 }
 
@@ -53,6 +52,7 @@ nav {
 .logo {
   font-size: 24px;
   font-weight: bold;
+  color: #333;
 }
 
 .nav-links li {
@@ -76,22 +76,33 @@ nav {
 .hero h1 {
   font-size: 48px;
   margin-bottom: 15px;
+  color: #fff;
 }
 
 .hero p {
   font-size: 24px;
+  color: #fff;
 }
 
 /* Section styles */
 
 .section {
   padding: 60px 0;
+  background-color: #fff;
+}
+
+.section h2 {
+  color: #333;
+}
+
+.section p {
+  color: #666;
 }
 
 /* Footer styles */
 
 footer {
-  background-color: #2e3d49;
+  background-color: #333;
   color: #fff;
   padding: 20px 0;
   text-align: center;
