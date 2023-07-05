@@ -112,3 +112,15 @@ footer p {
   font-size: 14px;
 }
 
+/* List syles */
+
+ul {
+  list-style-type: disc;  /* Bullets will be shown as filled circles */
+  padding-left: 20px;     /* Add some left padding to create indentation */
+}
+
+li {
+  margin-bottom: 10px;    /* Add spacing between list items */
+  line-height: 1.4;       /* Increase line height for better readability */
+}
+
