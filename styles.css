@@ -34,6 +34,20 @@ header {
   margin-bottom: 20px;
 }
 
+/* Typewriter styling */
+#typewriter {
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: .1em solid;
+  font-family: inherit;
+  font-size: inherit;
+  animation: blink .7s step-end infinite;
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
 .hero h1 {
   font-size: 4rem;
   font-weight: bold;
