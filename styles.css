@@ -1,37 +1,17 @@
-/* Reset styles */
+/* Global reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Global Styles */
+/* Body styling */
 body {
   font-family: Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  background-color: #ffffff;
+  background: #fff;
   color: #000;
-  /* 90's retro subtle pattern */
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P8//8/AwAI/AL+L0ZIRwAAAABJRU5ErkJggg==');
-  background-repeat: repeat;
-}
-
-/* Container for content sections */
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-/* Header and Hero Section */
-header {
-  padding: 20px;
-  border-bottom: 2px solid #000;
   text-align: center;
-}
-
-.hero {
-  margin-bottom: 20px;
+  padding: 50px;
 }
 
 /* Typewriter styling */
@@ -39,8 +19,7 @@ header {
   white-space: nowrap;
   overflow: hidden;
   border-right: .1em solid;
-  font-family: inherit;
-  font-size: inherit;
+  font-size: 2rem;
   animation: blink .7s step-end infinite;
 }
 
@@ -48,77 +27,35 @@ header {
   50% { border-color: transparent; }
 }
 
-.hero h1 {
-  font-size: 4rem;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  font-size: 1.25rem;
-}
-
-/* Navigation */
-nav {
-  margin-bottom: 20px;
-}
-
-.nav-links {
-  display: inline-flex;
-  list-style: none;
-  padding: 0;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
+/* Sparkle button */
+.sparkle-button {
+  margin-top: 20px;
+  padding: 0.5em 1.5em;
   font-size: 1rem;
-  color: #000;
-  text-decoration: none;
-  padding: 5px 10px;
-  border: 2px solid #000;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav-links a:hover {
-  background-color: #000;
+  font-weight: bold;
+  background: #ff9800;
   color: #fff;
+  border: none;
+  border-radius: 0.25em;
+  cursor: pointer;
 }
 
-/* Main Content Section */
-main {
-  padding: 40px 0;
+.sparkle-button:active {
+  transform: scale(0.95);
 }
 
-section#bio h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #000;
-  display: inline-block;
+/* Sparkle effect */
+.sparkle {
+  position: absolute;
+  background: gold;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle 600ms ease-out forwards;
 }
 
-section#bio h4 {
-  font-size: 1.125rem;
-  margin-bottom: 20px;
-}
-
-/* List styling */
-ul {
-  margin-bottom: 20px;
-}
-
-ul li {
-  margin-bottom: 10px;
-}
-
-/* Footer */
-footer {
-  background-color: #000;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
+@keyframes sparkle {
+  to {
+    opacity: 0;
+    transform: scale(3);
+  }
 }
