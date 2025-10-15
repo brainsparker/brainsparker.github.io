@@ -49,13 +49,16 @@ h2 {
 
 /* Bio */
 #bio {
-  text-align: center;
   margin-bottom: 40px;
+}
+#bio h2 {
+  text-align: center;
 }
 #bio p {
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 1rem;
+  text-align: left;
 }
 
 /* Links */
