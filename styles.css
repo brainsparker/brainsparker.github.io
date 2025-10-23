@@ -12,7 +12,7 @@ body {
 
 /* Main container */
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 60px auto;
   padding: 20px;
   background: #fff;
@@ -91,6 +91,6 @@ h2 {
 /* Responsive for large desktops */
 @media (min-width: 1024px) {
   .container {
-    max-width: 400px;
+    max-width: 800px;
   }
 }
