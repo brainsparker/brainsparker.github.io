@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Brian Sparker - Product Leader & Engineering Manager | Sparker.co</title>
+  <title>Brian Sparker - Product Leader | Sparker.co</title>
   <meta name="description" content="Brian Sparker is an experienced product leader with 10+ years building teams and scaling consumer apps. Former You.com product manager, MBA candidate at Boston University." />
-  <meta name="keywords" content="Brian Sparker, Product Manager, Engineering Leader, You.com, AI Products, Boston University MBA" />
+  <meta name="keywords" content="Brian Sparker, Product Manager, Product Leader, You.com, AI Products, Boston University MBA" />
   <meta name="author" content="Brian Sparker" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sparker.co/" />
-  <meta property="og:title" content="Brian Sparker - Product Leader & Engineering Manager" />
+  <meta property="og:title" content="Brian Sparker - Product Leader" />
   <meta property="og:description" content="Experienced product leader with 10+ years building teams and scaling consumer apps. Former You.com product manager, MBA candidate at Boston University." />
   <meta property="og:image" content="https://media.licdn.com/dms/image/v2/D5603AQEUHYRIN38QsA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1686880194472?e=2147483647&v=beta&t=fWDHZ1gpgAs-LhhJpxJcR1OTb55Dc81AQT45x7TKZdM" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary" />
   <meta property="twitter:url" content="https://sparker.co/" />
-  <meta property="twitter:title" content="Brian Sparker - Product Leader & Engineering Manager" />
+  <meta property="twitter:title" content="Brian Sparker - Product Leader" />
   <meta property="twitter:description" content="Experienced product leader with 10+ years building teams and scaling consumer apps. Former You.com product manager, MBA candidate at Boston University." />
   <meta property="twitter:image" content="https://media.licdn.com/dms/image/v2/D5603AQEUHYRIN38QsA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1686880194472?e=2147483647&v=beta&t=fWDHZ1gpgAs-LhhJpxJcR1OTb55Dc81AQT45x7TKZdM" />
 
@@ -30,6 +30,9 @@
   <link rel="apple-touch-icon" href="https://media.licdn.com/dms/image/v2/D5603AQEUHYRIN38QsA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1686880194472?e=2147483647&v=beta&t=fWDHZ1gpgAs-LhhJpxJcR1OTb55Dc81AQT45x7TKZdM" />
 
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MTXRGPF2B"></script>
@@ -49,7 +52,7 @@
     "name": "Brian Sparker",
     "url": "https://sparker.co",
     "image": "https://media.licdn.com/dms/image/v2/D5603AQEUHYRIN38QsA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1686880194472?e=2147483647&v=beta&t=fWDHZ1gpgAs-LhhJpxJcR1OTb55Dc81AQT45x7TKZdM",
-    "jobTitle": "Product Leader & Engineering Manager",
+    "jobTitle": "Product Leader",
     "description": "Experienced product leader with 10+ years building teams and scaling consumer apps",
     "alumniOf": {
       "@type": "CollegeOrUniversity",
@@ -68,14 +71,59 @@
   </script>
 </head>
 <body>
+  <!-- 3D Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Full-screen Hero -->
+  <section id="hero-splash">
+    <div class="hero-content">
+      <h1 class="mega-title">SPARKER</h1>
+      <p class="hero-subtitle">Product Leader</p>
+      <div class="scroll-indicator">
+        <span>Scroll to explore</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scroll Story Sections -->
+  <section class="story-section">
+    <div class="story-content">
+      <h2 class="story-title">10+</h2>
+      <p class="story-subtitle">Years building and scaling consumer products from concept to millions of users. I've led cross-functional teams through rapid growth, pivots, and the challenges that come with turning ambitious ideas into reality.</p>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <div class="story-content">
+      <h2 class="story-title">Search &<br>Discovery</h2>
+      <p class="story-subtitle">Deep expertise in search, discovery, and AI-powered experiences. At You.com, I helped shape how modern search works, building products that make information more contextual, useful, and connected to what people actually need.</p>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <div class="story-content">
+      <h2 class="story-title">MBA</h2>
+      <p class="story-subtitle">Currently completing my MBA at Boston University's Questrom School of Business, focusing on innovation, product strategy, and the intersection of technology and business value. This complements my hands-on product experience with strategic frameworks.</p>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <div class="story-content">
+      <h2 class="story-title">Real Human<br>Value</h2>
+      <p class="story-subtitle">I build the bridge between great technology and real human value. My work centers on understanding what people actually need, then translating complex systems into simple, valuable experiences that feel natural and human.</p>
+    </div>
+  </section>
+
   <div class="container">
     <header class="hero">
       <img
         class="avatar"
-        src="https://media.licdn.com/dms/image/v2/D5603AQEUHYRIN38QsA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1686880194472?e=2147483647&v=beta&t=fWDHZ1gpgAs-LhhJpxJcR1OTb55Dc81AQT45x7TKZdM"
+        src="https://avatars.githubusercontent.com/u/7835252?v=4"
         alt="Brian Sparker"
       />
-      <h1><span id="typewriter"></span></h1>
     </header>
 
     <section id="bio">
