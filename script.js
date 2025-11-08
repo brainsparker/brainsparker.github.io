@@ -194,29 +194,85 @@ function initFlipCards() {
 
 function initTooltips() {
   const tooltipWords = document.querySelectorAll('.tooltip-word');
+  const tooltipModal = document.getElementById('tooltip-modal');
+  const tooltipModalTitle = document.getElementById('tooltip-modal-title');
+  const tooltipModalBody = document.getElementById('tooltip-modal-body');
+  const tooltipModalClose = document.querySelector('.tooltip-modal-close');
+  const tooltipModalOverlay = document.querySelector('.tooltip-modal-overlay');
+
+  // Detect if mobile (screen width or touch capability)
+  const isMobile = () => window.innerWidth <= 768 || 'ontouchstart' in window;
 
   tooltipWords.forEach(word => {
-    // Add touch support for mobile devices
-    word.addEventListener('touchstart', function(e) {
-      // Prevent default to avoid triggering hover on some devices
+    word.addEventListener('click', function(e) {
       e.preventDefault();
+      e.stopPropagation();
 
-      // Toggle active class for touch
-      const wasActive = this.classList.contains('tooltip-active');
+      const tooltipText = this.getAttribute('data-tooltip');
+      const wordText = this.textContent;
 
-      // Remove active from all other tooltips
-      tooltipWords.forEach(w => w.classList.remove('tooltip-active'));
+      if (isMobile()) {
+        // Open modal on mobile
+        tooltipModalTitle.textContent = wordText;
+        tooltipModalBody.textContent = tooltipText;
+        tooltipModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
 
-      // Toggle this one
-      if (!wasActive) {
-        this.classList.add('tooltip-active');
+        // Track in Google Analytics
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'open_tooltip', {
+            'event_category': 'Tooltip',
+            'event_label': wordText
+          });
+        }
+      } else {
+        // Desktop: toggle active class for CSS tooltip
+        const wasActive = this.classList.contains('tooltip-active');
+        tooltipWords.forEach(w => w.classList.remove('tooltip-active'));
+        if (!wasActive) {
+          this.classList.add('tooltip-active');
+        }
       }
     });
+
+    // Keep hover for desktop
+    if (!isMobile()) {
+      word.addEventListener('mouseenter', function() {
+        this.classList.add('tooltip-active');
+      });
+
+      word.addEventListener('mouseleave', function() {
+        this.classList.remove('tooltip-active');
+      });
+    }
   });
 
-  // Close tooltips when tapping outside
-  document.addEventListener('touchstart', function(e) {
-    if (!e.target.classList.contains('tooltip-word')) {
+  // Close modal function
+  function closeTooltipModal() {
+    tooltipModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal on button click
+  if (tooltipModalClose) {
+    tooltipModalClose.addEventListener('click', closeTooltipModal);
+  }
+
+  // Close modal on overlay click
+  if (tooltipModalOverlay) {
+    tooltipModalOverlay.addEventListener('click', closeTooltipModal);
+  }
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && tooltipModal.classList.contains('active')) {
+      closeTooltipModal();
+    }
+  });
+
+  // Close tooltips when clicking outside (desktop only)
+  document.addEventListener('click', function(e) {
+    if (!isMobile() && !e.target.classList.contains('tooltip-word')) {
       tooltipWords.forEach(w => w.classList.remove('tooltip-active'));
     }
   });
