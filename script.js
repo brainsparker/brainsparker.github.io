@@ -3,6 +3,7 @@ window.addEventListener('load', () => {
   initThreeScene();
   initScrollEffects();
   initFlipCards();
+  initTooltips();
 });
 
 function initThreeScene() {
@@ -187,6 +188,36 @@ function initFlipCards() {
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       closeModal();
+    }
+  });
+}
+
+function initTooltips() {
+  const tooltipWords = document.querySelectorAll('.tooltip-word');
+
+  tooltipWords.forEach(word => {
+    // Add touch support for mobile devices
+    word.addEventListener('touchstart', function(e) {
+      // Prevent default to avoid triggering hover on some devices
+      e.preventDefault();
+
+      // Toggle active class for touch
+      const wasActive = this.classList.contains('tooltip-active');
+
+      // Remove active from all other tooltips
+      tooltipWords.forEach(w => w.classList.remove('tooltip-active'));
+
+      // Toggle this one
+      if (!wasActive) {
+        this.classList.add('tooltip-active');
+      }
+    });
+  });
+
+  // Close tooltips when tapping outside
+  document.addEventListener('touchstart', function(e) {
+    if (!e.target.classList.contains('tooltip-word')) {
+      tooltipWords.forEach(w => w.classList.remove('tooltip-active'));
     }
   });
 }
