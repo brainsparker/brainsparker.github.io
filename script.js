@@ -88,6 +88,12 @@ function initFlipCards() {
   const modal = document.getElementById('work-modal');
   const modalBody = document.getElementById('modal-body');
   const closeBtn = document.querySelector('.modal-close');
+  const prevBtn = document.querySelector('.modal-nav-prev');
+  const nextBtn = document.querySelector('.modal-nav-next');
+
+  // Work order array
+  const workOrder = ['chat', 'pricing', 'onboarding'];
+  let currentWorkIndex = 0;
 
   // Work content data
   const workContent = {
@@ -136,25 +142,47 @@ function initFlipCards() {
     }
   };
 
+  // Function to show work content by ID
+  function showWorkContent(workId) {
+    const content = workContent[workId];
+    if (content) {
+      modalBody.innerHTML = `<h3>${content.title}</h3>${content.content}`;
+      currentWorkIndex = workOrder.indexOf(workId);
+
+      // Scroll to top of modal content
+      if (modalBody.parentElement) {
+        modalBody.parentElement.scrollTop = 0;
+      }
+
+      // Track in Google Analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'open_work_modal', {
+          'event_category': 'Work',
+          'event_label': content.title
+        });
+      }
+    }
+  }
+
+  // Navigate to previous work
+  function navigatePrev() {
+    currentWorkIndex = (currentWorkIndex - 1 + workOrder.length) % workOrder.length;
+    showWorkContent(workOrder[currentWorkIndex]);
+  }
+
+  // Navigate to next work
+  function navigateNext() {
+    currentWorkIndex = (currentWorkIndex + 1) % workOrder.length;
+    showWorkContent(workOrder[currentWorkIndex]);
+  }
+
   // Open modal when clicking a card
   workCards.forEach(card => {
     card.addEventListener('click', function() {
       const workId = this.getAttribute('data-work-id');
-      const content = workContent[workId];
-
-      if (content) {
-        modalBody.innerHTML = `<h3>${content.title}</h3>${content.content}`;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-
-        // Track in Google Analytics
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'open_work_modal', {
-            'event_category': 'Work',
-            'event_label': content.title
-          });
-        }
-      }
+      showWorkContent(workId);
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     });
 
     // Add keyboard accessibility
@@ -169,6 +197,15 @@ function initFlipCards() {
       }
     });
   });
+
+  // Navigation button handlers
+  if (prevBtn) {
+    prevBtn.addEventListener('click', navigatePrev);
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', navigateNext);
+  }
 
   // Close modal
   function closeModal() {
@@ -185,10 +222,18 @@ function initFlipCards() {
     }
   });
 
-  // Close modal with Escape key
+  // Keyboard navigation for modal
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
+    if (!modal.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
       closeModal();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      navigatePrev();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      navigateNext();
     }
   });
 }

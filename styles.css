@@ -373,6 +373,61 @@ h2::after {
   justify-content: center;
 }
 
+/* Modal Navigation Arrows */
+.modal-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+}
+
+.modal-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.modal-nav-prev {
+  left: 40px;
+}
+
+.modal-nav-next {
+  right: 40px;
+}
+
+.modal-nav svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Hide navigation arrows on mobile */
+@media (max-width: 768px) {
+  .modal-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-nav-prev {
+    left: 20px;
+  }
+
+  .modal-nav-next {
+    right: 20px;
+  }
+}
+
 .modal-content {
   position: relative;
   background: rgba(20, 20, 30, 0.98);
