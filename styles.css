@@ -232,7 +232,7 @@ body {
   backdrop-filter: blur(20px);
   border-radius: 0;
   box-shadow: 0 -20px 60px rgba(0,0,0,0.5);
-  min-height: 100vh;
+  min-height: auto;
 }
 
 /* Hero */
@@ -653,6 +653,7 @@ h2::after {
 .connect-container {
   margin-top: 0;
   padding-top: 80px;
+  padding-bottom: 40px;
 }
 
 #bio p {
@@ -708,6 +709,15 @@ h2::after {
   opacity: 1;
   filter: brightness(1.5);
   transform: scale(1.1);
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 0;
+  color: #808080;
+  font-size: 0.9rem;
+  font-weight: 400;
 }
 
 /* Animations */
