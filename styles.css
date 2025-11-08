@@ -736,20 +736,18 @@ h2::after {
     padding: 0 30px;
   }
 
-  .tooltip-word::after {
-    max-width: calc(100vw - 40px);
-    width: auto;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%) translateY(-10px);
-    font-size: 0.875rem;
-    padding: 16px 20px;
-    text-align: left;
+  /* Hide CSS tooltips on mobile - use bottom sheet instead */
+  .tooltip-word::after,
+  .tooltip-word::before {
+    display: none !important;
   }
 
-  .tooltip-word:hover::after,
-  .tooltip-word.tooltip-active::after {
-    transform: translateX(-50%) translateY(-5px);
+  .tooltip-word {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+    -webkit-text-decoration: underline dotted rgba(255, 255, 255, 0.6);
+    text-decoration: underline dotted rgba(255, 255, 255, 0.6);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
   }
 
   #work {
