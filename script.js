@@ -122,6 +122,7 @@ function initFlipCards() {
     chat: {
       title: 'AI Search Engine',
       content: `
+        <img src="images/youcom-screenshot.png" alt="You.com AI Search Interface" class="work-image" />
         <h4>What it was</h4>
         <p>You.com started as a standard search engine with a layer of experimental mini-apps, including some early generative AI tools for code, writing, and images. Users liked the power, but the experience was still based on traditional search behaviors.</p>
         <h4>What I learned</h4>
