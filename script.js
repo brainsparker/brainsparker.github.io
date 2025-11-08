@@ -2,164 +2,11 @@
 window.addEventListener('load', () => {
   initThreeScene();
   initScrollEffects();
+  initFlipCards();
 });
 
 function initThreeScene() {
-  const canvas = document.getElementById('bg-canvas');
-  const scene = new THREE.Scene();
-
-  // Camera setup
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  camera.position.z = 30;
-
-  // Renderer setup
-  const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true,
-    alpha: true
-  });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  // Create Ouroboros (torus with snake-like appearance)
-  const ouroborosGroup = new THREE.Group();
-
-  // Main body - torus
-  const torusGeometry = new THREE.TorusGeometry(12, 0.8, 16, 100);
-  const torusMaterial = new THREE.MeshPhongMaterial({
-    color: 0x4a5568,
-    emissive: 0x1a1a2e,
-    emissiveIntensity: 0.3,
-    shininess: 100,
-    wireframe: false
-  });
-  const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-  ouroborosGroup.add(torus);
-
-  // Wireframe overlay for depth
-  const wireframeGeometry = new THREE.TorusGeometry(12, 0.85, 16, 100);
-  const wireframeMaterial = new THREE.MeshBasicMaterial({
-    color: 0x8899aa,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.3
-  });
-  const wireframe = new THREE.Mesh(wireframeGeometry, wireframeMaterial);
-  ouroborosGroup.add(wireframe);
-
-  // Add particles around the Ouroboros
-  const particlesGeometry = new THREE.BufferGeometry();
-  const particlesCount = 800;
-  const posArray = new Float32Array(particlesCount * 3);
-
-  for (let i = 0; i < particlesCount * 3; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const radius = 10 + Math.random() * 8;
-    const x = Math.cos(angle) * radius + (Math.random() - 0.5) * 20;
-    const y = (Math.random() - 0.5) * 40;
-    const z = Math.sin(angle) * radius + (Math.random() - 0.5) * 20;
-
-    posArray[i] = i % 3 === 0 ? x : i % 3 === 1 ? y : z;
-  }
-
-  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-  const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.15,
-    color: 0x6699cc,
-    transparent: true,
-    opacity: 0.6,
-    blending: THREE.AdditiveBlending
-  });
-
-  const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-  scene.add(particlesMesh);
-
-  // Lighting
-  const ambientLight = new THREE.AmbientLight(0x404040, 2);
-  scene.add(ambientLight);
-
-  const pointLight1 = new THREE.PointLight(0x6699cc, 2, 100);
-  pointLight1.position.set(20, 20, 20);
-  scene.add(pointLight1);
-
-  const pointLight2 = new THREE.PointLight(0x8899aa, 1.5, 100);
-  pointLight2.position.set(-20, -20, 20);
-  scene.add(pointLight2);
-
-  // Position and rotate the Ouroboros
-  ouroborosGroup.rotation.x = Math.PI / 4;
-  ouroborosGroup.position.y = 2;
-  scene.add(ouroborosGroup);
-
-  // Mouse tracking
-  let mouseX = 0;
-  let mouseY = 0;
-
-  document.addEventListener('mousemove', (event) => {
-    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-  });
-
-  // Scroll tracking
-  let scrollY = 0;
-  window.addEventListener('scroll', () => {
-    scrollY = window.scrollY;
-  });
-
-  // Animation loop
-  let time = 0;
-  function animate() {
-    requestAnimationFrame(animate);
-    time += 0.005;
-
-    // Rotate Ouroboros
-    ouroborosGroup.rotation.z += 0.002;
-    ouroborosGroup.rotation.y += 0.003;
-
-    // Mouse interaction
-    ouroborosGroup.rotation.x = Math.PI / 4 + mouseY * 0.3;
-    ouroborosGroup.rotation.z += mouseX * 0.001;
-
-    // Scroll effect - move scene down
-    camera.position.y = scrollY * 0.01;
-    ouroborosGroup.position.y = 2 - scrollY * 0.005;
-
-    // Animate particles
-    particlesMesh.rotation.y = time * 0.2;
-    const positions = particlesMesh.geometry.attributes.position.array;
-    for (let i = 0; i < positions.length; i += 3) {
-      positions[i + 1] += Math.sin(time + positions[i]) * 0.01;
-    }
-    particlesMesh.geometry.attributes.position.needsUpdate = true;
-
-    // Fade out canvas as you scroll
-    const heroHeight = window.innerHeight;
-    const fadeStart = heroHeight * 0.5;
-    const fadeEnd = heroHeight * 1.2;
-    if (scrollY > fadeStart) {
-      const fadeProgress = Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
-      canvas.style.opacity = 1 - fadeProgress * 0.7;
-    } else {
-      canvas.style.opacity = 1;
-    }
-
-    renderer.render(scene, camera);
-  }
-
-  animate();
-
-  // Handle window resize
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+  // Empty function - 3D scene removed
 }
 
 function initScrollEffects() {
@@ -230,7 +77,116 @@ function initScrollEffects() {
   }, observerOptions);
 
   // Observe sections
-  document.querySelectorAll('#bio, #links').forEach(section => {
+  document.querySelectorAll('#work, #bio, #links').forEach(section => {
     observer.observe(section);
+  });
+}
+
+function initFlipCards() {
+  const workCards = document.querySelectorAll('.work-card');
+  const modal = document.getElementById('work-modal');
+  const modalBody = document.getElementById('modal-body');
+  const closeBtn = document.querySelector('.modal-close');
+
+  // Work content data
+  const workContent = {
+    pricing: {
+      title: 'Ecommerce Search Platform',
+      content: `
+        <h4>What it was</h4>
+        <p>Crate & Barrel's search experience was inconsistent across web, mobile, and in-store systems. Product data and inventory states varied between properties, leading to mismatches and lost revenue opportunities.</p>
+        <h4>What I learned</h4>
+        <p>Search quality isn't just about ranking models — it depends on trustworthy data. Buyers make decisions faster and with more confidence when the product information is accurate, current, and consistent across every touchpoint.</p>
+        <h4>What I did</h4>
+        <p>I led the rebuild of the enterprise search platform using Apache Solr and Lucidworks Fusion. I established a single source of truth for SKU and inventory data, redesigned ingestion workflows, and introduced merchandising controls accessible across all brands.</p>
+        <h4>What changed</h4>
+        <p>Search, inventory, and product data became aligned across channels, enabling consistent experiences and reducing manual operational overhead.</p>
+        <div class="outcome"><strong>Outcome:</strong> Delivered 7-figure ROI in the first 30 days post-launch. Improved discovery reliability and kept inventory fulfillment accurate across digital and in-store systems.</div>
+      `
+    },
+    onboarding: {
+      title: 'Search & Discovery Marketplace',
+      content: `
+        <h4>What it was</h4>
+        <p>Software buyers visiting G2 needed a clearer way to understand, compare, and evaluate products. Search results surfaced options, but it was still difficult to navigate categories and decide confidently.</p>
+        <h4>What I learned</h4>
+        <p>When the decision space is complex, guidance matters as much as choice. Buyers convert when the path to understanding is structured, trustworthy, and adaptive to their intent.</p>
+        <h4>What I did</h4>
+        <p>I owned the search and discovery roadmap for the marketplace's buyer experience. I improved ranking and relevance logic, introduced personalization and recommendation patterns, and designed a generative "Did you mean?" flow powered by LLM inference to reduce dead ends. I also built workflows that improved review quality and trust.</p>
+        <h4>What changed</h4>
+        <p>Users could evaluate software with more confidence, navigate categories more efficiently, and understand comparisons more clearly.</p>
+        <div class="outcome"><strong>Outcome:</strong> Increased the core buyer engagement metric 145% year-over-year, strengthening marketplace credibility and buyer decision velocity.</div>
+      `
+    },
+    chat: {
+      title: 'AI Search Engine',
+      content: `
+        <h4>What it was</h4>
+        <p>You.com started as a standard search engine with a layer of experimental mini-apps, including some early generative AI tools for code, writing, and images. Users liked the power, but the experience was still based on traditional search behaviors.</p>
+        <h4>What I learned</h4>
+        <p>Through user research and rapid testing, we found that people didn't want AI added to search. They wanted to talk to the system and refine their intent naturally. They wanted answers that felt direct, helpful, and grounded in real sources.</p>
+        <h4>What I did</h4>
+        <p>I led the product direction and UX shift from search results to a conversational interface. I redesigned the input patterns, the response layer, and how context carried across turns. I also worked with engineering to ground responses using retrieval-augmented generation, so every answer pulled citations from our web index.</p>
+        <h4>What changed</h4>
+        <p>The product went from typing a query into a box to having a guided conversation that adapts, cites sources, and remembers context.</p>
+        <div class="outcome"><strong>Outcome:</strong> Grew from ~1M to ~10M monthly active users as we introduced the chat experience. Established the core interaction pattern for the product moving forward.</div>
+      `
+    }
+  };
+
+  // Open modal when clicking a card
+  workCards.forEach(card => {
+    card.addEventListener('click', function() {
+      const workId = this.getAttribute('data-work-id');
+      const content = workContent[workId];
+
+      if (content) {
+        modalBody.innerHTML = `<h3>${content.title}</h3>${content.content}`;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Track in Google Analytics
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'open_work_modal', {
+            'event_category': 'Work',
+            'event_label': content.title
+          });
+        }
+      }
+    });
+
+    // Add keyboard accessibility
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', 'Click to view details');
+
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+
+  // Close modal
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+
+  // Close modal when clicking outside content
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
   });
 }
