@@ -100,6 +100,7 @@ function initFlipCards() {
     pricing: {
       title: 'Ecommerce Search Platform',
       content: `
+        <img src="images/crateandbarrel-screenshot.png" alt="Crate & Barrel Search Interface" class="work-image" />
         <h4>What it was</h4>
         <p>Crate & Barrel's search experience was inconsistent across web, mobile, and in-store systems. Product data and inventory states varied between properties, leading to mismatches and lost revenue opportunities.</p>
         <h4>What I learned</h4>
@@ -114,6 +115,7 @@ function initFlipCards() {
     onboarding: {
       title: 'Search & Discovery Marketplace',
       content: `
+        <img src="images/g2-screenshot.png" alt="G2 Marketplace Search Interface" class="work-image" />
         <h4>What it was</h4>
         <p>Software buyers visiting G2 needed a clearer way to understand, compare, and evaluate products. Search results surfaced options, but it was still difficult to navigate categories and decide confidently.</p>
         <h4>What I learned</h4>
