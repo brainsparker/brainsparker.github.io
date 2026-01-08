@@ -321,6 +321,8 @@ h2::after {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
 }
 
 .work-card:hover {
