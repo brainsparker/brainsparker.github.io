@@ -1,14 +1,9 @@
-// Wait for Three.js to load
+// Initialize on load
 window.addEventListener('load', () => {
-  initThreeScene();
   initScrollEffects();
   initFlipCards();
   initTooltips();
 });
-
-function initThreeScene() {
-  // Empty function - 3D scene removed
-}
 
 function initScrollEffects() {
   // Smooth scroll for scroll indicator
@@ -22,24 +17,31 @@ function initScrollEffects() {
     });
   }
 
-  // Parallax effect on hero title
+  // Parallax effect on hero title (throttled with requestAnimationFrame)
   const heroTitle = document.querySelector('.mega-title');
   const heroSubtitle = document.querySelector('.hero-subtitle');
+  let ticking = false;
 
   window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const heroHeight = window.innerHeight;
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const heroHeight = window.innerHeight;
 
-    if (scrollY < heroHeight) {
-      const parallaxAmount = scrollY * 0.5;
-      if (heroTitle) {
-        heroTitle.style.transform = `translateY(${parallaxAmount}px)`;
-        heroTitle.style.opacity = 1 - (scrollY / heroHeight) * 1.5;
-      }
-      if (heroSubtitle) {
-        heroSubtitle.style.transform = `translateY(${parallaxAmount * 0.8}px)`;
-        heroSubtitle.style.opacity = 1 - (scrollY / heroHeight) * 1.5;
-      }
+        if (scrollY < heroHeight) {
+          const parallaxAmount = scrollY * 0.5;
+          if (heroTitle) {
+            heroTitle.style.transform = `translateY(${parallaxAmount}px)`;
+            heroTitle.style.opacity = 1 - (scrollY / heroHeight) * 1.5;
+          }
+          if (heroSubtitle) {
+            heroSubtitle.style.transform = `translateY(${parallaxAmount * 0.8}px)`;
+            heroSubtitle.style.opacity = 1 - (scrollY / heroHeight) * 1.5;
+          }
+        }
+        ticking = false;
+      });
+      ticking = true;
     }
   });
 
@@ -100,7 +102,7 @@ function initFlipCards() {
     pricing: {
       title: 'Ecommerce Search Platform',
       content: `
-        <img src="images/crateandbarrel-screenshot.png" alt="Crate & Barrel Search Interface" class="work-image" />
+        <img src="images/crateandbarrel-screenshot.png" alt="Crate & Barrel Search Interface" class="work-image" loading="lazy" />
         <h4>What it was</h4>
         <p>Crate & Barrel's search experience was inconsistent across web, mobile, and in-store systems. Product data and inventory states varied between properties, leading to mismatches and lost revenue opportunities.</p>
         <h4>What I learned</h4>
@@ -115,7 +117,7 @@ function initFlipCards() {
     onboarding: {
       title: 'Search & Discovery Marketplace',
       content: `
-        <img src="images/g2-screenshot.png" alt="G2 Marketplace Search Interface" class="work-image" />
+        <img src="images/g2-screenshot.png" alt="G2 Marketplace Search Interface" class="work-image" loading="lazy" />
         <h4>What it was</h4>
         <p>Software buyers visiting G2 needed a clearer way to understand, compare, and evaluate products. Search results surfaced options, but it was still difficult to navigate categories and decide confidently.</p>
         <h4>What I learned</h4>
@@ -130,7 +132,7 @@ function initFlipCards() {
     chat: {
       title: 'AI Search Engine',
       content: `
-        <img src="images/youcom-screenshot.png" alt="You.com AI Search Interface" class="work-image" />
+        <img src="images/youcom-screenshot.png" alt="You.com AI Search Interface" class="work-image" loading="lazy" />
         <h4>What it was</h4>
         <p>You.com started as a standard search engine with a layer of experimental mini-apps, including some early generative AI tools for code, writing, and images. Users liked the power, but the experience was still based on traditional search behaviors.</p>
         <h4>What I learned</h4>
@@ -144,12 +146,25 @@ function initFlipCards() {
     }
   };
 
+  // Position indicator dots
+  const positionDots = document.querySelectorAll('.position-dot');
+
+  // Function to update position indicator
+  function updatePositionIndicator() {
+    positionDots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentWorkIndex);
+    });
+  }
+
   // Function to show work content by ID
   function showWorkContent(workId) {
     const content = workContent[workId];
     if (content) {
-      modalBody.innerHTML = `<h3>${content.title}</h3>${content.content}`;
+      modalBody.innerHTML = `<h3 id="modal-title">${content.title}</h3>${content.content}`;
       currentWorkIndex = workOrder.indexOf(workId);
+
+      // Update position indicator
+      updatePositionIndicator();
 
       // Scroll to top of modal content
       if (modalBody.parentElement) {
@@ -178,26 +193,35 @@ function initFlipCards() {
     showWorkContent(workOrder[currentWorkIndex]);
   }
 
+  // Track triggering element for focus return
+  let triggeringElement = null;
+
   // Open modal when clicking a card
   workCards.forEach(card => {
     card.addEventListener('click', function() {
       const workId = this.getAttribute('data-work-id');
+      if (!workId) return; // Skip external link cards
+      triggeringElement = this;
       showWorkContent(workId);
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
+      // Focus the close button for accessibility
+      setTimeout(() => closeBtn.focus(), 100);
     });
 
-    // Add keyboard accessibility
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('role', 'button');
-    card.setAttribute('aria-label', 'Click to view details');
+    // Add keyboard accessibility (only for modal cards)
+    if (card.getAttribute('data-work-id')) {
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `View details about ${card.querySelector('h3')?.textContent || 'this work'}`);
 
-    card.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        this.click();
-      }
-    });
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    }
   });
 
   // Navigation button handlers
@@ -213,9 +237,54 @@ function initFlipCards() {
   function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    // Return focus to triggering element
+    if (triggeringElement) {
+      triggeringElement.focus();
+      triggeringElement = null;
+    }
   }
 
   closeBtn.addEventListener('click', closeModal);
+
+  // Focus trap for modal
+  const focusableElements = [closeBtn, prevBtn, nextBtn].filter(Boolean);
+  modal.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab' && modal.classList.contains('active')) {
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    }
+  });
+
+  // Swipe gesture support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const minSwipeDistance = 50;
+
+  modal.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  modal.addEventListener('touchend', function(e) {
+    if (!modal.classList.contains('active')) return;
+    touchEndX = e.changedTouches[0].screenX;
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (Math.abs(swipeDistance) > minSwipeDistance) {
+      if (swipeDistance > 0) {
+        navigatePrev(); // Swipe right = previous
+      } else {
+        navigateNext(); // Swipe left = next
+      }
+    }
+  }, { passive: true });
 
   // Close modal when clicking outside content
   modal.addEventListener('click', function(e) {
