@@ -3,6 +3,7 @@ window.addEventListener('load', () => {
   initScrollEffects();
   initFlipCards();
   initTooltips();
+  initNewsletterSignup();
 });
 
 function initScrollEffects() {
@@ -391,6 +392,79 @@ function initTooltips() {
   document.addEventListener('click', function(e) {
     if (!isMobile() && !e.target.classList.contains('tooltip-word')) {
       tooltipWords.forEach(w => w.classList.remove('tooltip-active'));
+    }
+  });
+}
+
+function initNewsletterSignup() {
+  const form = document.getElementById('newsletter-form');
+  const emailInput = document.getElementById('newsletter-email');
+  const status = document.getElementById('newsletter-status');
+
+  if (!form || !emailInput || !status) return;
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  const action = (form.getAttribute('action') || '').trim();
+  const isPlaceholderEndpoint = action === '' || action.includes('example.com/subscribe');
+
+  const setStatus = (message, type = '') => {
+    status.textContent = message;
+    status.classList.remove('is-success', 'is-error');
+    if (type) status.classList.add(type);
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!emailInput.value || !emailInput.checkValidity()) {
+      setStatus('Please enter a valid email address.', 'is-error');
+      emailInput.focus();
+      return;
+    }
+
+    if (isPlaceholderEndpoint) {
+      setStatus('Signup is almost ready. Newsletter provider endpoint still needs to be configured.', 'is-error');
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    try {
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.setAttribute('aria-busy', 'true');
+      }
+      setStatus('Subscribing...');
+
+      const response = await fetch(action, {
+        method: form.method || 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      form.reset();
+      setStatus('Thanks for subscribing — you are on the list.', 'is-success');
+
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'newsletter_subscribe', {
+          event_category: 'Connect',
+          event_label: 'Newsletter'
+        });
+      }
+    } catch (error) {
+      setStatus('Could not subscribe right now. Please try again in a moment.', 'is-error');
+      console.error('Newsletter signup failed:', error);
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.removeAttribute('aria-busy');
+      }
     }
   });
 }
