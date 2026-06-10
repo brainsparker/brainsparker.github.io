@@ -16,7 +16,7 @@ Brian Sparker operates in complex, cross-functional environments — partnering 
 - [LabelMerge — Open Source Mail Merge](https://sparker.co/free-mail-merge/): Free, privacy-first mail merge tool that runs entirely in-browser, eliminating data exposure and access requirements for Google Sheets users.
 - [PromptLens — Open Source LLM Evaluation Suite](https://github.com/brainsparker/PromptLens): Evaluation framework for testing and optimizing LLM prompts, providing systematic analysis tools to measure response quality and improve AI application performance.
 - [you.md — Open Standard for AI Preferences](https://github.com/brainsparker/you.md): Parser library and CLI tool implementing a portable format for AI assistant preferences, enabling consistent coding style and context across AI-assisted development platforms.
-- [Bold-Claim — Open Source Positioning Skill](https://github.com/brainsparker/Bold-Claim): Claude skill that researches competitive landscapes and surfaces the single contested sentence driving a product's GTM motion, scoring claim candidates against a 25-point sharpness rubric.
+- [skills — Open Source PM Skills](https://github.com/brainsparker/skills): Library of composable Claude skills for modern product management — finding a product's contested GTM sentence (bold-claim), PM-lens PR review against the asserted claim (claim-review), and CLI scaffolding (quickstart).
 - [frugal.sh — Open Source AI Cost Optimizer](https://frugal.sh): AI toolchain router that dispatches each task to the cheapest reliable path across local models, hosted models, search, and browser tools — shipped as a single signed Go binary with CLI and MCP server.
 
 ## Connect
