@@ -4,7 +4,17 @@ window.addEventListener('load', () => {
   initFlipCards();
   initTooltips();
   initCopyrightYear();
+  initEmailLink();
 });
+
+function initEmailLink() {
+  const emailLink = document.getElementById('email-link');
+  if (emailLink) {
+    // Assembled at runtime so the address never appears in the HTML source
+    const address = ['sparker', 'hey.com'].join('@');
+    emailLink.setAttribute('href', 'mailto:' + address);
+  }
+}
 
 function initCopyrightYear() {
   const yearEl = document.getElementById('copyright-year');

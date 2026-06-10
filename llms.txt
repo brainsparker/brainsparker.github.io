@@ -1,6 +1,6 @@
 # Brian Sparker
 
-> Product leader with 10+ years building teams and scaling consumer apps at the intersection of product, growth, and emerging technology. Former You.com product manager focused on AI, search, and developer platforms. MBA from Boston University Questrom School of Business.
+> Product leader with 10+ years building teams and scaling consumer apps at the intersection of product, growth, and emerging technology. Staff Product Manager at You.com focused on AI, search, and developer platforms. MBA from Boston University Questrom School of Business.
 
 Brian Sparker operates in complex, cross-functional environments — partnering with engineering, design, sales, marketing, and leadership to turn fuzzy ideas into concrete systems that ship and scale. Recurring themes in his work include distribution, pricing, packaging, and how AI products should be priced, constrained, and explained so users trust them. He is deeply hands-on: prototyping, writing PRDs, pressure-testing assumptions, and building lightweight tools to validate ideas quickly.
 
@@ -18,6 +18,7 @@ Brian Sparker operates in complex, cross-functional environments — partnering 
 - [you.md — Open Standard for AI Preferences](https://github.com/brainsparker/you.md): Parser library and CLI tool implementing a portable format for AI assistant preferences, enabling consistent coding style and context across AI-assisted development platforms.
 - [skills — Open Source PM Skills](https://github.com/brainsparker/skills): Library of composable Claude skills for modern product management — finding a product's contested GTM sentence (bold-claim), PM-lens PR review against the asserted claim (claim-review), and CLI scaffolding (quickstart).
 - [frugal.sh — Open Source AI Cost Optimizer](https://frugal.sh): AI toolchain router that dispatches each task to the cheapest reliable path across local models, hosted models, search, and browser tools — shipped as a single signed Go binary with CLI and MCP server.
+- [SuperPaste — AI Contextual Writing Tool](https://superpaste.ai): macOS app that reads your active window and composes context-aware emails, messages, and code with a single hotkey — privacy-first, open source, and powered by Claude.
 
 ## Connect
 
