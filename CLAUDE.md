@@ -219,7 +219,7 @@ JSON-LD schema is embedded in `index.html` as a `<script type="application/ld+js
 
 ### Work Portfolio Items
 
-Current items (in order): AI Search (You.com), Ecommerce Search (Crate & Barrel), Search Marketplace (G2), Open Source Mail Merge (LabelMerge), LLM Evaluation (PromptLens), AI Preferences Standard (you.md).
+Current items (in order): AI Search (You.com), Ecommerce Search (Crate & Barrel), Search Marketplace (G2), Open Source Mail Merge (LabelMerge), LLM Evaluation (PromptLens), AI Preferences Standard (you.md), PM Skills (skills), AI Cost Optimizer (frugal.sh), AI Contextual Writing Tool (SuperPaste).
 
 To add a new work item:
 1. Add entry to `workContent` in `script.js`
