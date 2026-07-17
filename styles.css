@@ -304,7 +304,7 @@ h2::after {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, scale 0.14s ease-out;
   cursor: pointer;
   min-height: 250px;
   display: flex;
@@ -319,6 +319,21 @@ h2::after {
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   transform: translateY(-4px);
+}
+
+.work-card:active {
+  scale: 0.98;
+}
+
+/* Staggered entrance for work cards (classes added by JS) */
+#work.reveal-pending .work-card {
+  opacity: 0;
+}
+
+#work.reveal-pending.revealed .work-card {
+  opacity: 1;
+  animation: fadeInUp 0.5s ease-out backwards;
+  animation-delay: calc(var(--card-index, 0) * 60ms);
 }
 
 .work-card h3 {
@@ -405,6 +420,15 @@ a.work-card h3::after {
   justify-content: center;
 }
 
+/* Exit mirrors the entrance: fade the overlay, settle the content back down */
+.modal.closing {
+  animation: fadeOut 0.2s ease-in forwards;
+}
+
+.modal.closing .modal-content {
+  animation: slideDown 0.2s ease-in forwards;
+}
+
 /* Modal Navigation Arrows */
 .modal-nav {
   position: fixed;
@@ -419,7 +443,7 @@ a.work-card h3::after {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, scale 0.14s ease-out;
   z-index: 1001;
   color: #ffffff;
   backdrop-filter: blur(10px);
@@ -429,6 +453,10 @@ a.work-card h3::after {
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-50%) scale(1.1);
+}
+
+.modal-nav:active {
+  scale: 0.95;
 }
 
 .modal-nav-prev {
@@ -502,6 +530,13 @@ a.work-card h3::after {
 
 .modal-body {
   color: #e0e0e0;
+  transition: opacity 0.12s ease-out;
+}
+
+/* Micro-crossfade while navigating between works */
+.modal-body.switching {
+  opacity: 0;
+  transition: opacity 0.08s ease-in;
 }
 
 .modal-body h3 {
@@ -575,6 +610,13 @@ a.work-card h3::after {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  to {
+    opacity: 0;
+    transform: translateY(12px);
   }
 }
 
@@ -665,12 +707,27 @@ a.work-card h3::after {
   line-height: 1.7;
 }
 
+/* Bottom sheet exits the same edge it entered */
+.tooltip-modal.closing .tooltip-modal-overlay {
+  animation: fadeOut 0.25s ease-in forwards;
+}
+
+.tooltip-modal.closing .tooltip-modal-content {
+  animation: slideDownModal 0.25s ease-in forwards;
+}
+
 @keyframes slideUpModal {
   from {
     transform: translateY(100%);
   }
   to {
     transform: translateY(0);
+  }
+}
+
+@keyframes slideDownModal {
+  to {
+    transform: translateY(100%);
   }
 }
 
@@ -716,9 +773,13 @@ a.work-card h3::after {
   color: #e0e0e0;
   font-size: 1.2rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, scale 0.14s ease-out;
   background: rgba(255,255,255,0.03);
   backdrop-filter: blur(10px);
+}
+
+.link-card:active {
+  scale: 0.98;
 }
 
 .link-card:hover {
@@ -771,6 +832,12 @@ a.work-card h3::after {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
   }
 }
 
@@ -948,6 +1015,13 @@ a.work-card h3::after {
   .story-content {
     opacity: 1;
     transform: none;
+  }
+
+  /* Skip the staggered reveal — the global rule zeroes durations but not delays */
+  #work.reveal-pending .work-card,
+  #work.reveal-pending.revealed .work-card {
+    animation: none;
+    opacity: 1;
   }
 
   .work-card:hover,

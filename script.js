@@ -93,9 +93,21 @@ function initScrollEffects() {
       if (entry.isIntersecting) {
         entry.target.style.opacity = '1';
         entry.target.style.transform = 'translateY(0)';
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
+
+  // Staggered entrance for work cards; hidden state is only applied
+  // once JS runs, so cards stay visible without JavaScript
+  const workSection = document.getElementById('work');
+  if (workSection) {
+    workSection.querySelectorAll('.work-card').forEach((card, index) => {
+      card.style.setProperty('--card-index', index);
+    });
+    workSection.classList.add('reveal-pending');
+  }
 
   // Observe sections
   document.querySelectorAll('#work, #bio, #links').forEach(section => {
@@ -174,10 +186,15 @@ function initFlipCards() {
     });
   }
 
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let switchTimeout = null;
+
   // Function to show work content by ID
   function showWorkContent(workId) {
     const content = workContent[workId];
-    if (content) {
+    if (!content) return;
+
+    const render = () => {
       modalBody.innerHTML = `<h3 id="modal-title">${content.title}</h3>${content.content}`;
       currentWorkIndex = workOrder.indexOf(workId);
 
@@ -196,6 +213,18 @@ function initFlipCards() {
           'event_label': content.title
         });
       }
+    };
+
+    // Micro-crossfade when navigating with the modal already open
+    if (modal.classList.contains('active') && !prefersReducedMotion.matches) {
+      modalBody.classList.add('switching');
+      clearTimeout(switchTimeout);
+      switchTimeout = setTimeout(() => {
+        render();
+        modalBody.classList.remove('switching');
+      }, 80);
+    } else {
+      render();
     }
   }
 
@@ -251,15 +280,20 @@ function initFlipCards() {
     nextBtn.addEventListener('click', navigateNext);
   }
 
-  // Close modal
+  // Close modal (exit animation runs first, then display is released)
   function closeModal() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    // Return focus to triggering element
-    if (triggeringElement) {
-      triggeringElement.focus();
-      triggeringElement = null;
-    }
+    if (!modal.classList.contains('active') || modal.classList.contains('closing')) return;
+    modal.classList.add('closing');
+    const content = modal.querySelector('.modal-content');
+    content.addEventListener('animationend', () => {
+      modal.classList.remove('active', 'closing');
+      document.body.style.overflow = '';
+      // Return focus to triggering element
+      if (triggeringElement) {
+        triggeringElement.focus();
+        triggeringElement = null;
+      }
+    }, { once: true });
   }
 
   closeBtn.addEventListener('click', closeModal);
@@ -382,10 +416,15 @@ function initTooltips() {
     }
   });
 
-  // Close modal function
+  // Close modal function (sheet slides back down before display is released)
   function closeTooltipModal() {
-    tooltipModal.classList.remove('active');
-    document.body.style.overflow = '';
+    if (!tooltipModal.classList.contains('active') || tooltipModal.classList.contains('closing')) return;
+    tooltipModal.classList.add('closing');
+    const content = tooltipModal.querySelector('.tooltip-modal-content');
+    content.addEventListener('animationend', () => {
+      tooltipModal.classList.remove('active', 'closing');
+      document.body.style.overflow = '';
+    }, { once: true });
   }
 
   // Close modal on button click
