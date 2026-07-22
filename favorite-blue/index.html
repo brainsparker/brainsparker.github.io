@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#165fa3" />
+    <title>Blue, Slowly</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Arial, Helvetica, sans-serif;
+        font-synthesis: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        overflow: hidden;
+        background: #165fa3;
+        color: white;
+      }
+
+      .color-field,
+      .color-field::before,
+      .color-field::after {
+        position: fixed;
+        inset: 0;
+      }
+
+      .color-field {
+        z-index: 0;
+        background-color: var(--blue, #165fa3);
+        transition: background-color 10s linear;
+      }
+
+      .color-field::before,
+      .color-field::after {
+        content: "";
+        pointer-events: none;
+      }
+
+      .color-field::before {
+        background:
+          radial-gradient(circle at 15% 18%, rgb(255 255 255 / 14%), transparent 42%),
+          radial-gradient(circle at 82% 76%, rgb(2 18 44 / 24%), transparent 48%);
+        animation: drift 28s ease-in-out infinite alternate;
+      }
+
+      .color-field::after {
+        opacity: 0.22;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.22'/%3E%3C/svg%3E");
+        mix-blend-mode: soft-light;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        min-height: 100svh;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        padding: clamp(1.5rem, 4vw, 4rem);
+      }
+
+      header,
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      header {
+        border-top: 1px solid rgb(255 255 255 / 45%);
+        padding-top: 0.85rem;
+      }
+
+      .mark {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+      }
+
+      .mark::before {
+        width: 0.55rem;
+        height: 0.55rem;
+        border: 1px solid currentColor;
+        border-radius: 50%;
+        content: "";
+      }
+
+      .intro {
+        opacity: 0.72;
+      }
+
+      .portrait {
+        align-self: center;
+        width: min(100%, 88rem);
+        padding-block: 7vh;
+      }
+
+      .eyebrow {
+        margin: 0 0 clamp(1rem, 3vh, 2rem);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(0.85rem, 1.15vw, 1.1rem);
+        font-style: italic;
+        letter-spacing: 0.04em;
+        opacity: 0.8;
+      }
+
+      .name-window {
+        overflow: hidden;
+      }
+
+      h1 {
+        max-width: 12ch;
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(4rem, 13vw, 12rem);
+        font-weight: 400;
+        letter-spacing: -0.065em;
+        line-height: 0.82;
+        text-wrap: balance;
+        text-shadow: 0 2px 25px rgb(0 20 50 / 9%);
+      }
+
+      h1.leaving {
+        animation: leave 1.1s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+      }
+
+      h1.arriving {
+        animation: arrive 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      footer {
+        align-items: end;
+      }
+
+      .hex {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .counter {
+        width: 10rem;
+      }
+
+      .counter-track {
+        height: 1px;
+        margin-top: 0.7rem;
+        overflow: hidden;
+        background: rgb(255 255 255 / 30%);
+      }
+
+      .counter-track span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left;
+      }
+
+      .counter-track span.running {
+        animation: count 10s linear forwards;
+      }
+
+      @keyframes drift {
+        from { transform: scale(1.05) translate3d(-2%, -1%, 0); }
+        to { transform: scale(1.14) translate3d(3%, 2%, 0); }
+      }
+
+      @keyframes leave {
+        to { transform: translateY(-105%); opacity: 0; }
+      }
+
+      @keyframes arrive {
+        from { transform: translateY(105%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+
+      @keyframes count {
+        to { transform: scaleX(1); }
+      }
+
+      @media (max-width: 600px) {
+        .intro {
+          display: none;
+        }
+
+        h1 {
+          font-size: clamp(4.2rem, 22vw, 7rem);
+          line-height: 0.88;
+        }
+
+        footer {
+          font-size: 0.62rem;
+        }
+
+        .counter {
+          width: 7rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .color-field,
+        h1,
+        .counter-track span {
+          transition-duration: 0.01ms;
+          animation-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="color-field" aria-hidden="true"></div>
+
+    <main>
+      <header>
+        <div class="mark">Blue, Slowly</div>
+        <div class="intro">An endless study in blue</div>
+      </header>
+
+      <section class="portrait" aria-live="polite">
+        <p class="eyebrow">At this moment, blue calls itself</p>
+        <div class="name-window">
+          <h1 id="color-name">Distant Harbor</h1>
+        </div>
+      </section>
+
+      <footer>
+        <div>
+          <div>Current color</div>
+          <div class="hex" id="hex">#165FA3</div>
+        </div>
+        <div class="counter">
+          <div>Becoming something else</div>
+          <div class="counter-track"><span id="progress"></span></div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      const adjectives = [
+        "Distant", "Quiet", "Tender", "Velvet", "Infinite", "Falling",
+        "After", "Pale", "Electric", "Midnight", "Open", "Soft",
+        "Borrowed", "Slow", "Last", "Weightless", "Hidden", "Deep"
+      ];
+
+      const subjects = [
+        "Harbor", "Weather", "Hour", "Current", "Horizon", "Rain",
+        "Memory", "Tide", "Silence", "Window", "Ocean", "Dream",
+        "Distance", "Evening", "Sky", "Echo", "River", "Light"
+      ];
+
+      const field = document.querySelector(".color-field");
+      const name = document.querySelector("#color-name");
+      const hex = document.querySelector("#hex");
+      const progress = document.querySelector("#progress");
+      let step = 0;
+
+      function hslToHex(h, s, l) {
+        s /= 100;
+        l /= 100;
+        const chroma = (1 - Math.abs(2 * l - 1)) * s;
+        const x = chroma * (1 - Math.abs((h / 60) % 2 - 1));
+        const m = l - chroma / 2;
+        let rgb;
+
+        if (h < 60) rgb = [chroma, x, 0];
+        else if (h < 120) rgb = [x, chroma, 0];
+        else if (h < 180) rgb = [0, chroma, x];
+        else if (h < 240) rgb = [0, x, chroma];
+        else if (h < 300) rgb = [x, 0, chroma];
+        else rgb = [chroma, 0, x];
+
+        return "#" + rgb
+          .map(value => Math.round((value + m) * 255).toString(16).padStart(2, "0"))
+          .join("")
+          .toUpperCase();
+      }
+
+      function nextBlue() {
+        step += 1;
+
+        // Irrational increments keep the sequence wandering without obvious repetition.
+        const hue = 195 + ((step * 17.3) % 48);
+        const saturation = 45 + ((step * 23.7) % 42);
+        const lightness = 28 + ((step * 13.1) % 34);
+        const nextHex = hslToHex(hue, saturation, lightness);
+
+        const adjective = adjectives[(step * 7) % adjectives.length];
+        const subjectIndex = (step * 11 + Math.floor(step / adjectives.length)) % subjects.length;
+        const nextName = `${adjective} ${subjects[subjectIndex]}`;
+
+        field.style.setProperty("--blue", nextHex);
+        document.querySelector('meta[name="theme-color"]').content = nextHex;
+        hex.textContent = nextHex;
+        name.className = "leaving";
+
+        window.setTimeout(() => {
+          name.textContent = nextName;
+          name.className = "arriving";
+        }, 850);
+
+        progress.classList.remove("running");
+        void progress.offsetWidth;
+        progress.classList.add("running");
+      }
+
+      progress.classList.add("running");
+      window.setInterval(nextBlue, 10000);
+    </script>
+  </body>
+</html>
