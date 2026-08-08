@@ -20,8 +20,7 @@ brainsparker.github.io/
 ├── index.html        # The whole site: markup + inline <style> + inline <script>
 ├── images/           # Screenshots (.png) and portrait, each with a .webp twin
 ├── assets/og.png     # Open Graph share image
-├── free-mail-merge/  # Standalone LabelMerge tool (separate page, own styles)
-├── favorite-blue/    # Standalone archived page
+├── favorite-blue/    # Standalone archived page (own styles, not part of the main page)
 ├── CNAME             # GitHub Pages custom domain → sparker.co
 ├── llms.txt          # Machine-readable summary for LLM crawlers
 ├── robots.txt        # Crawl permissions
@@ -74,6 +73,8 @@ when making changes — the bar for adding anything is high.
 - **One accent color.** Orange `--signal` (`#ee4c2f`), used sparingly: the
   wordmark dot, the period in the hero, result numbers, hover states, focus
   rings. Everything else is ink on paper.
+- **Black on white.** `--paper` is `#ffffff` and `--ink` is `#000000`. The page
+  is white end to end — no tinted bands, no alternating section backgrounds.
 - **Six color variables total.** `--paper`, `--ink`, `--muted`, `--signal`,
   `--signal-deep`, `--line`. Do not add a seventh without a real reason.
   `--signal-deep` exists only because `--signal` at 11px does not meet AA
@@ -156,8 +157,8 @@ Targets WCAG 2.1 AA.
 - Decorative glyphs (`●`, `↗`, the hero period) need `aria-hidden="true"`.
 - Images need descriptive `alt` text.
 - Focus rings are visible via `a:focus-visible`. Do not remove the outline.
-- Color contrast must meet AA minimums. `--signal` (`#ee4c2f`) is only 3.17:1
-  against paper, so it may be used for **large text only** (≥24px, or ≥18.7px
+- Color contrast must meet AA minimums. `--signal` (`#ee4c2f`) is only 3.68:1
+  against white, so it may be used for **large text only** (≥24px, or ≥18.7px
   bold) — result numbers, the footer `<em>`, project names on hover. For small
   text, hover with an underline rather than a color change.
 
