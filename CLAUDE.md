@@ -2,13 +2,14 @@
 
 ## Project Overview
 
-This is a **personal portfolio website** for Brian Sparker, a product leader and entrepreneur. It is a fully static, single-page site deployed via GitHub Pages at **sparker.co**. The site showcases professional experience, portfolio work, and contact/social links.
+Personal portfolio site for Brian Sparker, a product leader working in AI and
+search. Fully static, single page, deployed via GitHub Pages at **sparker.co**.
 
 **Key facts:**
 - No build tools, no package manager, no dependencies
-- Vanilla HTML/CSS/JS only
-- Deployed automatically by GitHub Pages on every push to `main`/`master`
-- Custom domain configured via `CNAME` file (`sparker.co`)
+- **The entire site is one file: `index.html`** — markup, CSS, and JS all inline
+- Deployed automatically by GitHub Pages on every push to `main`
+- Custom domain configured via `CNAME` (`sparker.co`)
 
 ---
 
@@ -16,22 +17,21 @@ This is a **personal portfolio website** for Brian Sparker, a product leader and
 
 ```
 brainsparker.github.io/
-├── index.html        # Entire site markup (237 lines)
-├── script.js         # All interactivity (396 lines)
-├── styles.css        # All styling and animations (946 lines)
-├── images/           # Work portfolio screenshots (PNG)
-│   ├── crateandbarrel-screenshot.png
-│   ├── g2-screenshot.png
-│   └── youcom-screenshot.png
+├── index.html        # The whole site: markup + inline <style> + inline <script>
+├── images/           # Screenshots (.png) and portrait, each with a .webp twin
+├── assets/og.png     # Open Graph share image
+├── favorite-blue/    # Standalone archived page (own styles, not part of the main page)
 ├── CNAME             # GitHub Pages custom domain → sparker.co
-├── robots.txt        # Search engine crawl permissions
-├── sitemap.xml       # XML sitemap for SEO
-├── README.md         # Minimal project description
-└── .vscode/
-    └── launch.json   # Chrome debug config (localhost:8080)
+├── llms.txt          # Machine-readable summary for LLM crawlers
+├── robots.txt        # Crawl permissions
+├── sitemap.xml       # XML sitemap
+└── .vscode/          # Chrome debug config (localhost:8080)
 ```
 
-There is no `src/`, `dist/`, `build/`, `node_modules/`, or any other generated directory. All source files live at the root level.
+There is no `src/`, `dist/`, `build/`, or `node_modules/`. There is no
+`styles.css` or `script.js` — those were removed when the site was consolidated
+into `index.html`. Do not reintroduce them; the page is small enough that a
+single file is simpler and saves two round trips.
 
 ---
 
@@ -40,205 +40,137 @@ There is no `src/`, `dist/`, `build/`, `node_modules/`, or any other generated d
 | Layer | Technology |
 |-------|-----------|
 | Markup | HTML5 (semantic elements) |
-| Styling | CSS3 (custom properties, grid, flexbox, keyframes) |
-| Scripting | Vanilla ES6+ JavaScript (no frameworks) |
+| Styling | CSS3 in a single inline `<style>` block (custom properties, grid, flexbox) |
+| Scripting | ~20 lines of vanilla ES6 in an inline `<script>` at end of `<body>` |
 | Analytics | Google Analytics 4 (`G-8MTXRGPF2B`) + Google Ads conversion pixel |
-| SEO | JSON-LD structured data (schema.org `Person` type), Open Graph, Twitter Cards |
+| SEO | JSON-LD (`WebSite`, `ProfilePage`, `Person`), Open Graph, Twitter Cards |
 | Hosting | GitHub Pages |
-| Domain | Custom domain via CNAME (`sparker.co`) |
 
 ---
 
 ## Development Workflow
 
-### Local Development
-
-There is no build step. Serve files directly with any static file server:
+No build step. Serve the directory with any static file server:
 
 ```bash
-# Using Python (no install required)
-python3 -m http.server 8080
-
-# Using Node.js npx
-npx serve .
-
-# VS Code Live Server extension also works
+python3 -m http.server 8080     # then open http://localhost:8080
 ```
 
-The `.vscode/launch.json` is configured to launch Chrome against `http://localhost:8080`.
+`.vscode/launch.json` launches Chrome against `http://localhost:8080`.
 
-### Making Changes
-
-Edit the three core files directly:
-- `index.html` — structure and content
-- `styles.css` — all visual styling
-- `script.js` — all interactive behavior
-
-### Deployment
-
-Push to `main` (or `master`) and GitHub Pages automatically publishes. No CI/CD pipeline or build step is required.
+Push to `main` and GitHub Pages publishes. No CI, no build.
 
 ---
 
-## HTML Conventions
+## Design Principles
 
-### Page Sections
+The site was deliberately refactored down to its simplest form. Preserve that
+when making changes — the bar for adding anything is high.
 
-The single-page layout follows this section order:
-
-1. **`#hero-splash`** — Full-screen landing with animated title and scroll indicator
-2. **`#bio`** — Professional bio with tooltip-enhanced descriptors
-3. **`#work`** — Portfolio cards with modal lightbox system
-4. **`#connect`** — Social/contact links
-
-### Key Patterns
-
-**Data attributes drive interactivity** — avoid hardcoding behavior in JS:
-```html
-<div class="work-card" data-work-id="chat">
-<span class="tooltip-word" data-tooltip="Definition text here">word</span>
-```
-
-**Modals use ARIA roles:**
-```html
-<div id="work-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-```
-
-**External links always have `target="_blank" rel="noopener noreferrer"`** for security.
+- **One typeface.** Helvetica (`"Helvetica Neue", Helvetica, Arial, sans-serif`)
+  for everything, set once in `--font`. No serif, no monospace, no webfonts, no
+  network font requests. Hierarchy comes from size, weight, and letter-spacing.
+- **One accent color.** Orange `--signal` (`#ee4c2f`), used sparingly: the
+  wordmark dot, the period in the hero, result numbers, hover states, focus
+  rings. Everything else is ink on paper.
+- **Black on white.** `--paper` is `#ffffff` and `--ink` is `#000000`. The page
+  is white end to end — no tinted bands, no alternating section backgrounds.
+- **Six color variables total.** `--paper`, `--ink`, `--muted`, `--signal`,
+  `--signal-deep`, `--line`. Do not add a seventh without a real reason.
+  `--signal-deep` exists only because `--signal` at 11px does not meet AA
+  contrast; use it whenever small text sits on the accent color.
+- **Flat surfaces.** No shadows, gradients, blur, glassmorphism, or inverted
+  color bands. Hairline rules (`--line`) do the separating.
+- **Character comes from the writing**, not from effects. The copy is plain,
+  warm, and a little wry ("Got a messy problem? Let's talk."). Keep that voice.
+- **One motion effect.** A fade-and-rise on scroll via `.reveal`. That is the
+  whole animation budget.
 
 ---
 
-## CSS Conventions
+## Code Conventions
 
-### Structure
+### CSS
 
-The stylesheet is organized in this order:
-1. CSS custom properties (`:root` variables)
-2. CSS reset / base styles
-3. Section-specific styles (hero → bio → work → connect)
-4. Modal and overlay styles
-5. Animations (`@keyframes`)
-6. Responsive breakpoints (`@media`)
-7. Accessibility (`prefers-reduced-motion`)
+The inline stylesheet runs in this order: `:root` variables → base/reset →
+shared type scale → header → sections → per-section styles (work, projects,
+about) → footer → reveal → media queries → `prefers-reduced-motion`.
 
-### Key Patterns
+- Element selectors are preferred over classes where the element is unambiguous
+  (`section`, `h2`, `.projects b`). Classes are lowercase and hyphenated. No
+  BEM, no utility classes.
+- Breakpoints are `900px` and `640px` only. Page width is one variable,
+  `--page`, redefined per breakpoint.
+- Any new animation needs a `prefers-reduced-motion: reduce` override.
 
-- **CSS variables** for all repeated colors and spacing values — add new values to `:root`
-- **Mobile-first** with breakpoints at `480px`, `768px`, and `1024px`
-- **`backdrop-filter: blur()`** for glassmorphism effects on cards
-- **Gradient text** uses `-webkit-background-clip: text` pattern
-- **Always include** `prefers-reduced-motion` overrides when adding new animations
+### JavaScript
 
-### Naming
+The script is intentionally tiny and does exactly three things: sets the
+copyright year, runs the `.reveal` IntersectionObserver, and fires `gtag`
+click events. It runs at the end of `<body>` — there is no `load` handler,
+no module system, and no libraries.
 
-Classes use lowercase hyphenated names (`work-card`, `modal-overlay`, `hero-title`). No BEM, no utility classes.
-
----
-
-## JavaScript Conventions
-
-### Architecture
-
-All code runs inside a single `window.addEventListener('load', () => { ... })` handler. There is no module system, no global state object, and no external libraries.
-
-### Key Patterns
-
-**Feature detection before gtag calls:**
-```javascript
-if (typeof gtag !== 'undefined') {
-  gtag('event', 'event_name', { event_label: value });
-}
-```
-
-**Mobile detection:**
-```javascript
-const isMobile = () => window.innerWidth <= 768 || 'ontouchstart' in window;
-```
-
-**Scroll performance — always use `requestAnimationFrame`:**
-```javascript
-let ticking = false;
-window.addEventListener('scroll', () => {
-  if (!ticking) {
-    requestAnimationFrame(() => { /* work here */ ticking = false; });
-    ticking = true;
-  }
-});
-```
-
-**Intersection Observer for scroll-triggered animations** — do not use scroll listeners for fade-in effects.
-
-**Focus management for modals:**
-- Save the triggering element before opening: `triggerElement = document.activeElement`
-- Return focus on close: `triggerElement.focus()`
-- Trap Tab/Shift-Tab within open modals
-
-### Work Content Data
-
-All work portfolio copy lives in the `workContent` object in `script.js`. To add or edit a work item:
-1. Add/update the entry in `workContent` with `title` and `content` (HTML string) keys
-2. Add the corresponding card markup in `index.html` with a matching `data-work-id`
-3. Add a screenshot to `images/` if needed
-
----
-
-## Accessibility Requirements
-
-This site targets WCAG 2.1 AA compliance. When making changes:
-
-- **All interactive elements** must be keyboard-navigable (Tab + Enter/Space)
-- **Modals** must trap focus while open and restore focus on close
-- **Images** must have descriptive `alt` attributes
-- **SVG icons** must have `aria-label` or `aria-hidden="true"` (if decorative)
-- **Color contrast** must meet AA minimums
-- **New animations** must respect `prefers-reduced-motion: reduce`
-
----
-
-## SEO & Analytics
-
-### Tracking Events
-
-Analytics are tracked via `gtag()` calls in `script.js`. Currently tracked events:
-
-| Event | Trigger |
-|-------|---------|
-| `work_modal_open` | User opens a work card |
-| `tooltip_view` | User views a tooltip |
-| Link clicks | External navigation links |
-
-When adding new interactive features, add a corresponding `gtag('event', ...)` call.
-
-### Structured Data
-
-JSON-LD schema is embedded in `index.html` as a `<script type="application/ld+json">` block. Update it when changing professional information (title, employer, skills).
+- **Always feature-detect gtag**, since ad blockers remove it:
+  ```javascript
+  if (typeof gtag === 'undefined') return;
+  ```
+- Use IntersectionObserver for scroll-triggered effects, never a scroll
+  listener. If a scroll listener ever becomes necessary, throttle it with
+  `requestAnimationFrame`.
 
 ---
 
 ## Content Guidelines
 
-### Work Portfolio Items
+### Selected work (`#work`)
 
-Current items (in order): AI Search (You.com), Ecommerce Search (Crate & Barrel), Search Marketplace (G2), Open Source Mail Merge (LabelMerge), LLM Evaluation (PromptLens), AI Preferences Standard (you.md), PM Skills (skills), AI Cost Optimizer (frugal.sh), AI Contextual Writing Tool (SuperPaste).
+Three case studies: You.com, Crate & Barrel, G2. Each is an `<article class="case">`
+with a `.label` eyebrow, an `<h3>`, one paragraph of context, and a `.result`
+whose `<strong>` holds the headline number.
 
-To add a new work item:
-1. Add entry to `workContent` in `script.js`
-2. Add `<div class="work-card" data-work-id="...">` in `index.html` inside `#work`
-3. Add screenshot to `images/` (PNG format, ~400–700 KB)
-4. Update `sitemap.xml` lastmod date if content changed significantly
+To add one: copy an existing `.case` block, add the screenshot to `images/` as
+both `.png` and `.webp`, and set explicit `width`/`height` on the `<img>` to
+prevent layout shift. Keep the section at three — it is "selected" work.
 
-### Bio & Tooltip Words
+### Side projects (`#projects`)
 
-Tooltip definitions for highlighted words in the bio section are stored as `data-tooltip` attributes directly in `index.html`. Edit them inline.
+A `<ul class="projects">` of rows; each row is `<b>` name, `<span>` description,
+`<i>` arrow. Add a `<li>` to the list — nothing else is required.
+
+External links always carry `target="_blank" rel="noopener noreferrer"`.
+
+### Keeping metadata in sync
+
+When professional info or content changes, update in the same commit:
+- the JSON-LD `Person` block and `dateModified` in `index.html`
+- `llms.txt`
+- `sitemap.xml` `lastmod`
+
+---
+
+## Accessibility
+
+Targets WCAG 2.1 AA.
+
+- All interactive elements are real links — keyboard navigation works for free.
+  Keep it that way rather than adding click handlers to `<div>`s.
+- Decorative glyphs (`●`, `↗`, the hero period) need `aria-hidden="true"`.
+- Images need descriptive `alt` text.
+- Focus rings are visible via `a:focus-visible`. Do not remove the outline.
+- Color contrast must meet AA minimums. `--signal` (`#ee4c2f`) is only 3.68:1
+  against white, so it may be used for **large text only** (≥24px, or ≥18.7px
+  bold) — result numbers, the footer `<em>`, project names on hover. For small
+  text, hover with an underline rather than a color change.
 
 ---
 
 ## What Not to Do
 
-- **Do not add a build system** (webpack, Vite, etc.) without explicit instruction — the entire value of this project is zero dependencies
+- **Do not split `index.html`** back into separate CSS/JS files
+- **Do not add a build system** (webpack, Vite, etc.) — zero dependencies is the point
 - **Do not add npm/package.json** unless specifically requested
-- **Do not introduce CSS frameworks** (Bootstrap, Tailwind) — all styling is custom
-- **Do not add JavaScript frameworks** (React, Vue, etc.) — vanilla JS is intentional
-- **Do not commit `.DS_Store`** or other OS metadata files
+- **Do not add CSS frameworks** (Bootstrap, Tailwind) or JS frameworks (React, Vue)
+- **Do not add webfonts** — Helvetica is a deliberate choice, and it is already installed
+- **Do not add shadows, gradients, or blur effects** — see Design Principles
+- **Do not commit `.DS_Store`** or other OS metadata (see `.gitignore`)
 - **Do not modify `CNAME`** unless intentionally changing the domain
-- **Do not hardcode content** in JS that should be in `data-*` attributes or the `workContent` object
