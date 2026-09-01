@@ -3,31 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Brian Sparker — Product Leader in AI &amp; Search | Sparker</title>
+  <title>Brian Sparker — Product Leader in AI &amp; Search</title>
   <meta name="description" content="Brian Sparker is a product leader and hands-on builder working across AI, search, growth, and developer tools. Explore selected work and side projects." />
   <meta name="author" content="Brian Sparker" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#ffffff" />
 
   <link rel="canonical" href="https://sparker.co/" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='38' fill='%23ee4c2f'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='38' fill='%23151515'/%3E%3C/svg%3E" />
 
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="Sparker" />
+  <meta property="og:site_name" content="Brian Sparker" />
   <meta property="og:url" content="https://sparker.co/" />
   <meta property="og:title" content="Brian Sparker — Product Leader in AI &amp; Search" />
   <meta property="og:description" content="Product leader and hands-on builder working across AI, search, growth, and developer tools." />
   <meta property="og:image" content="https://sparker.co/assets/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Sparker — Brian Sparker, product leader and builder" />
+  <meta property="og:image:alt" content="Brian Sparker, product leader and builder" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Brian Sparker — Product Leader in AI &amp; Search" />
   <meta name="twitter:description" content="Product leader and hands-on builder working across AI, search, growth, and developer tools." />
   <meta name="twitter:image" content="https://sparker.co/assets/og.png" />
-  <meta name="twitter:image:alt" content="Sparker — Brian Sparker, product leader and builder" />
+  <meta name="twitter:image:alt" content="Brian Sparker, product leader and builder" />
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MTXRGPF2B"></script>
   <script>
@@ -50,8 +50,8 @@
         "@type": "WebSite",
         "@id": "https://sparker.co/#website",
         "url": "https://sparker.co/",
-        "name": "Sparker",
-        "alternateName": ["Brian Sparker", "Sparker.co"],
+        "name": "Brian Sparker",
+        "alternateName": ["Sparker", "Sparker.co"],
         "description": "The portfolio of product leader and hands-on builder Brian Sparker.",
         "inLanguage": "en-US"
       },
@@ -61,7 +61,7 @@
         "url": "https://sparker.co/",
         "name": "Brian Sparker — Product Leader and Builder",
         "datePublished": "2026-05-27T00:00:00-04:00",
-        "dateModified": "2026-08-08T00:00:00-04:00",
+        "dateModified": "2026-09-01T00:00:00-04:00",
         "isPartOf": { "@id": "https://sparker.co/#website" },
         "mainEntity": { "@id": "https://sparker.co/#person" }
       },
@@ -96,424 +96,368 @@
   </script>
 
   <style>
-    /* One typeface (Helvetica), one accent (orange), one page width. */
     :root {
-      --paper: #ffffff;
-      --ink: #000000;
-      --muted: #6b6b6b;
-      --signal: #ee4c2f;
-      /* Darker signal, for the one place small text sits on the accent. */
-      --signal-deep: #c2351b;
-      --line: rgba(0, 0, 0, 0.15);
-      --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      --page: min(1000px, 100% - 64px);
+      --background: #fff;
+      --text: #151515;
+      --muted: #5f5f5a;
+      --border: #d8d8d3;
+      --link: #2457a6;
+      --page-width: 760px;
     }
 
     * { box-sizing: border-box; }
 
     html {
-      background: var(--paper);
+      background: var(--background);
       scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font: 400 17px/1.65 var(--font);
+      background: var(--background);
+      color: var(--text);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
 
-    img { display: block; width: 100%; height: auto; }
-    a { color: inherit; text-decoration: none; }
-    a:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
-    ::selection { background: var(--signal); color: #fff; }
+    ::selection { background: #d9e5f7; }
 
-    .shell {
-      width: var(--page);
+    a {
+      color: var(--link);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    a:hover { text-decoration-thickness: 2px; }
+
+    a:focus-visible {
+      outline: 2px solid var(--link);
+      outline-offset: 4px;
+    }
+
+    .page {
+      width: min(var(--page-width), calc(100% - 40px));
       margin-inline: auto;
     }
 
-    /* Small uppercase caption. The only type style that isn't just a size. */
-    .label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
+    .site-header { border-bottom: 1px solid var(--border); }
+
+    .header-inner {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding-block: 22px;
     }
 
-    h1, h2, h3 {
+    .home-link {
+      color: var(--text);
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 15px;
+    }
+
+    nav a { color: var(--muted); }
+
+    .intro { padding-block: clamp(72px, 13vw, 124px); }
+
+    .intro h1 {
+      max-width: 13ch;
       margin: 0;
-      font-weight: 700;
-      letter-spacing: -0.04em;
+      font-size: clamp(42px, 7vw, 62px);
+      font-weight: 650;
+      letter-spacing: -0.045em;
       line-height: 1.05;
     }
 
-    h1 { font-size: clamp(62px, 11vw, 120px); letter-spacing: -0.055em; }
-    h2 { font-size: clamp(34px, 4.4vw, 52px); }
-    h3 { font-size: clamp(26px, 3vw, 36px); line-height: 1.12; }
-
-    .dot { color: var(--signal); }
-
-    /* ---- header ---- */
-
-    .masthead {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 30px 0;
-    }
-
-    .wordmark { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
-    .wordmark .dot { margin-right: 7px; }
-
-    /* Small text stays ink on hover — orange at 11px would not meet AA. */
-    .masthead a:hover { text-decoration: underline; text-underline-offset: 5px; }
-
-    /* ---- sections ---- */
-
-    section {
-      padding: clamp(72px, 11vh, 108px) 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .hero { border-top: 0; padding-top: clamp(40px, 8vh, 80px); }
-    .hero .label { display: block; margin-bottom: 26px; color: var(--muted); }
-    .hero h1 { max-width: 12ch; }
-
-    .lede {
-      max-width: 46ch;
-      margin: 32px 0 0;
-      font-size: clamp(19px, 1.7vw, 23px);
-      letter-spacing: -0.015em;
-      line-height: 1.45;
-    }
-
-    .intro { margin-bottom: clamp(44px, 7vh, 68px); }
-
     .intro p {
-      max-width: 48ch;
-      margin: 16px 0 0;
-      color: var(--muted);
-      font-size: 16px;
+      max-width: 620px;
+      margin: 30px 0 0;
+      color: #3f3f3a;
+      font-size: clamp(19px, 2.4vw, 22px);
+      line-height: 1.55;
     }
 
-    /* ---- selected work ---- */
-
-    .case {
-      display: grid;
-      grid-template-columns: 1fr 1.15fr;
-      gap: clamp(32px, 5vw, 60px);
-      align-items: center;
-      padding: clamp(44px, 7vh, 68px) 0;
-      border-top: 1px solid var(--line);
+    .section {
+      padding-block: 72px;
+      border-top: 1px solid var(--border);
     }
 
-    .case:first-of-type { border-top: 0; padding-top: 0; }
-    .case:last-of-type { padding-bottom: 0; }
+    h2, h3, p, figure { margin-top: 0; }
 
-    .case .label { color: var(--muted); }
-    .case h3 { margin: 16px 0 18px; }
-
-    .case p { max-width: 48ch; margin: 0; font-size: 16px; }
-
-    .result {
-      margin-top: 24px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.45;
-    }
-
-    .result strong {
-      display: block;
-      color: var(--signal);
+    h2 {
+      margin-bottom: 8px;
       font-size: 30px;
-      letter-spacing: -0.03em;
+      font-weight: 650;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
     }
 
-    .case img,
-    .portrait img {
-      border: 1px solid var(--line);
-      border-radius: 3px;
-      background: var(--paper);
+    h3 {
+      margin-bottom: 16px;
+      font-size: 24px;
+      font-weight: 650;
+      letter-spacing: -0.018em;
+      line-height: 1.3;
     }
 
-    /* ---- side projects ---- */
-
-    .projects { list-style: none; margin: 0; padding: 0; }
-
-    .projects a {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) 16px;
-      gap: 12px 32px;
-      align-items: baseline;
-      padding: 22px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .projects li:last-child a { border-bottom: 1px solid var(--line); }
-
-    .projects b { font-size: 21px; font-weight: 700; letter-spacing: -0.03em; }
-    .projects span { color: var(--muted); font-size: 15px; line-height: 1.45; }
-
-    .projects i {
-      justify-self: end;
+    .section-intro {
+      margin-bottom: 0;
       color: var(--muted);
-      font-style: normal;
-      transition: transform 180ms ease;
     }
 
-    .projects a:hover { color: var(--signal); }
-    .projects a:hover span { color: var(--ink); }
-    .projects a:hover i { color: var(--signal); transform: translate(3px, -3px); }
+    .work-item {
+      padding-block: 52px;
+      border-bottom: 1px solid var(--border);
+    }
 
-    /* ---- about ---- */
+    .work-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .work-item p {
+      max-width: 660px;
+      margin-bottom: 16px;
+    }
+
+    .work-item figure { margin: 30px 0 0; }
+
+    .work-item picture,
+    .work-item img {
+      display: block;
+      width: 100%;
+    }
+
+    .work-item img {
+      height: auto;
+      border: 1px solid var(--border);
+      background: #eee;
+    }
+
+    .project-list {
+      margin: 34px 0 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-list li {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-list a { font-weight: 650; }
 
     .about {
       display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: clamp(32px, 5vw, 60px);
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 36px;
       align-items: start;
-    }
-
-    .about p { max-width: 58ch; margin: 0; }
-
-    .about .label {
-      margin-top: 26px;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      line-height: 2;
-    }
-
-    /* ---- footer ---- */
-
-    footer {
-      padding: clamp(72px, 11vh, 104px) 0 28px;
-      border-top: 1px solid var(--line);
-    }
-
-    footer h2 { max-width: 15ch; }
-    footer h2 em { color: var(--signal); }
-
-    .email {
-      display: inline-block;
       margin-top: 32px;
-      padding: 14px 24px;
-      border-radius: 3px;
-      background: var(--ink);
-      color: var(--paper);
-      transition: background-color 180ms ease;
     }
 
-    .email:hover { background: var(--signal-deep); }
+    .about picture,
+    .about img {
+      display: block;
+      width: 100%;
+    }
 
-    .colophon {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 14px 24px;
-      margin-top: clamp(60px, 9vh, 92px);
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
+    .about img {
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .about p { margin-bottom: 18px; }
+
+    .about p:last-child {
+      margin-bottom: 0;
       color: var(--muted);
+      font-size: 15px;
     }
 
-    .colophon div { display: flex; gap: 22px; }
-    .colophon a:hover { text-decoration: underline; text-underline-offset: 4px; }
-
-    /* ---- reveal on scroll ---- */
-
-    .js .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 500ms cubic-bezier(0.23, 1, 0.32, 1),
-                  transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    .site-footer {
+      padding-block: 56px 36px;
+      border-top: 1px solid var(--border);
     }
 
-    .js .reveal.shown { opacity: 1; transform: none; }
+    .site-footer h2 {
+      margin-bottom: 4px;
+      font-size: 24px;
+    }
 
-    /* ---- responsive ---- */
+    .email-link { font-weight: 650; }
 
-    @media (max-width: 900px) {
-      :root { --page: min(100% - 40px, 700px); }
-      .case { grid-template-columns: 1fr; }
-      .case-visual { order: -1; }
-      .projects a {
-        grid-template-columns: minmax(0, 1fr) 16px;
-        grid-template-areas: "name arrow" "desc arrow";
-        gap: 6px 20px;
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .footer-inner p { margin-bottom: 0; }
+
+    .footer-meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-meta a { color: inherit; }
+
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
       }
-      .projects b { grid-area: name; }
-      .projects span { grid-area: desc; }
-      .projects i { grid-area: arrow; align-self: center; }
-    }
 
-    @media (max-width: 640px) {
-      :root { --page: calc(100% - 32px); }
-      .about { grid-template-columns: 1fr; }
-      .portrait { max-width: 200px; }
+      .intro { padding-block: 64px; }
+      .section { padding-block: 56px; }
+      .work-item { padding-block: 42px; }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .about picture { width: 130px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .js .reveal { opacity: 1; transform: none; }
     }
   </style>
-  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body id="top">
-  <div class="shell">
-    <header class="masthead">
-      <a class="wordmark" href="#top"><span class="dot" aria-hidden="true">●</span>Sparker</a>
-      <a class="label" href="mailto:sparker@hey.com">Email <span aria-hidden="true">↗</span></a>
-    </header>
+  <header class="site-header">
+    <div class="page header-inner">
+      <a class="home-link" href="#top">Brian Sparker</a>
+      <nav aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero">
-        <span class="label reveal">Brian Sparker — Staff Product Manager at You.com</span>
-        <h1 class="reveal">Sparker<span class="dot" aria-hidden="true">.</span></h1>
-        <p class="lede reveal">I help teams turn fuzzy ideas and new technology into useful products people actually want. Most of my work lives around AI, search, and developer tools.</p>
-      </section>
+  <main>
+    <section class="page intro" aria-labelledby="intro-title">
+      <h1 id="intro-title">I make complicated products easier to use.</h1>
+      <p>I’m Brian, a Staff Product Manager at You.com. I help teams turn fuzzy ideas and new technology into useful products people actually want. Most of my work lives around AI, search, and developer tools.</p>
+    </section>
 
-      <section id="work">
-        <div class="intro reveal">
-          <h2>Selected work</h2>
-          <p>Three messy product problems, what we changed, and what happened next.</p>
-        </div>
+    <section class="page section" id="work" aria-labelledby="work-title">
+      <h2 id="work-title">Work</h2>
+      <p class="section-intro">Three messy product problems, what we changed, and what happened next.</p>
 
-        <article class="case reveal">
-          <div>
-            <span class="label">You.com · AI search</span>
-            <h3>Making search feel more like a conversation.</h3>
-            <p>You.com began as a traditional search engine with a layer of AI tools. Research made the opportunity clear: people wanted to ask follow-ups and shape their intent in conversation. I led the move to a chat-first experience with answers grounded in sources.</p>
-            <p class="result"><strong>1M → 10M</strong> monthly users as chat became the main experience</p>
-          </div>
-          <div class="case-visual">
-            <picture>
-              <source srcset="images/youcom-screenshot.webp" type="image/webp" />
-              <img src="images/youcom-screenshot.png" width="1540" height="1304" alt="The You.com conversational AI search interface" loading="lazy" decoding="async" />
-            </picture>
-          </div>
-        </article>
+      <article class="work-item">
+        <h3>Making search feel more like a conversation</h3>
+        <p>You.com began as a traditional search engine with a layer of AI tools. Research made the opportunity clear: people wanted to ask follow-ups and shape their intent in conversation. I led the move to a chat-first experience with answers grounded in sources.</p>
+        <p><strong>Monthly users grew from about 1 million to 10 million</strong> as chat became the main experience.</p>
+        <figure>
+          <picture>
+            <source srcset="images/youcom-screenshot.webp" type="image/webp" />
+            <img src="images/youcom-screenshot.png" width="1540" height="1304" alt="The You.com conversational AI search interface" loading="lazy" decoding="async" />
+          </picture>
+        </figure>
+      </article>
 
-        <article class="case reveal">
-          <div>
-            <span class="label">Crate &amp; Barrel · Search infrastructure</span>
-            <h3>Fixing the messy plumbing behind search.</h3>
-            <p>Crate &amp; Barrel’s search, inventory, and product data didn’t always agree. That made discovery frustrating for shoppers and expensive for the business. I led the rebuild underneath it all so the same trustworthy information powered every channel.</p>
-            <p class="result"><strong>7 figures</strong> in ROI delivered within 30 days of launch</p>
-          </div>
-          <div class="case-visual">
-            <picture>
-              <source srcset="images/crateandbarrel-screenshot.webp" type="image/webp" />
-              <img src="images/crateandbarrel-screenshot.png" width="1279" height="910" alt="Crate and Barrel ecommerce search interface" loading="lazy" decoding="async" />
-            </picture>
-          </div>
-        </article>
+      <article class="work-item">
+        <h3>Fixing the messy plumbing behind search</h3>
+        <p>Crate &amp; Barrel’s search, inventory, and product data didn’t always agree. That made discovery frustrating for shoppers and expensive for the business. I led the rebuild underneath it all so the same trustworthy information powered every channel.</p>
+        <p><strong>The new platform delivered seven figures in ROI</strong> within 30 days of launch.</p>
+        <figure>
+          <picture>
+            <source srcset="images/crateandbarrel-screenshot.webp" type="image/webp" />
+            <img src="images/crateandbarrel-screenshot.png" width="1279" height="910" alt="Crate and Barrel ecommerce search interface" loading="lazy" decoding="async" />
+          </picture>
+        </figure>
+      </article>
 
-        <article class="case reveal">
-          <div>
-            <span class="label">G2 · Marketplace discovery</span>
-            <h3>Helping buyers feel confident about a choice.</h3>
-            <p>G2’s buyers had plenty of software options. The harder part was knowing which one was right. I owned the search roadmap across ranking, personalization, recommendations, and AI-powered guidance.</p>
-            <p class="result"><strong>+145%</strong> year-over-year increase in core buyer engagement</p>
-          </div>
-          <div class="case-visual">
-            <picture>
-              <source srcset="images/g2-screenshot.webp" type="image/webp" />
-              <img src="images/g2-screenshot.png" width="1369" height="910" alt="G2 marketplace search interface" loading="lazy" decoding="async" />
-            </picture>
-          </div>
-        </article>
-      </section>
+      <article class="work-item">
+        <h3>Helping buyers feel confident about a choice</h3>
+        <p>G2’s buyers had plenty of software options. The harder part was knowing which one was right. I owned the search roadmap across ranking, personalization, recommendations, and AI-powered guidance.</p>
+        <p><strong>Core buyer engagement increased 145% year over year.</strong></p>
+        <figure>
+          <picture>
+            <source srcset="images/g2-screenshot.webp" type="image/webp" />
+            <img src="images/g2-screenshot.png" width="1369" height="910" alt="G2 marketplace search interface" loading="lazy" decoding="async" />
+          </picture>
+        </figure>
+      </article>
+    </section>
 
-      <section id="projects">
-        <div class="intro reveal">
-          <h2>Side projects</h2>
-          <p>Small tools and open standards. Building is how I learn.</p>
-        </div>
+    <section class="page section" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Side projects</h2>
+      <p class="section-intro">Small tools and open standards. Building is how I learn.</p>
 
-        <ul class="projects reveal">
-          <li><a href="https://superpaste.ai" target="_blank" rel="noopener noreferrer">
-            <b>SuperPaste</b><span>Context-aware writing for macOS, triggered with a single hotkey.</span><i aria-hidden="true">↗</i>
-          </a></li>
-          <li><a href="https://frugal.sh" target="_blank" rel="noopener noreferrer">
-            <b>frugal.sh</b><span>Routes AI work to the cheapest reliable toolchain.</span><i aria-hidden="true">↗</i>
-          </a></li>
-          <li><a href="https://github.com/brainsparker/you.md" target="_blank" rel="noopener noreferrer">
-            <b>you.md</b><span>A portable standard for preferences across AI assistants.</span><i aria-hidden="true">↗</i>
-          </a></li>
-          <li><a href="https://github.com/brainsparker/PromptLens" target="_blank" rel="noopener noreferrer">
-            <b>PromptLens</b><span>A systematic evaluation framework for LLM prompts.</span><i aria-hidden="true">↗</i>
-          </a></li>
-          <li><a href="https://sparker.co/free-mail-merge/" target="_blank" rel="noopener noreferrer">
-            <b>LabelMerge</b><span>Private mail merge that runs entirely inside the browser.</span><i aria-hidden="true">↗</i>
-          </a></li>
-        </ul>
-      </section>
+      <ul class="project-list">
+        <li><a href="https://superpaste.ai" target="_blank" rel="noopener noreferrer">SuperPaste</a> — Context-aware writing for macOS, triggered with a single hotkey.</li>
+        <li><a href="https://frugal.sh" target="_blank" rel="noopener noreferrer">frugal.sh</a> — Routes AI work to the cheapest reliable toolchain.</li>
+        <li><a href="https://github.com/brainsparker/you.md" target="_blank" rel="noopener noreferrer">you.md</a> — A portable standard for preferences across AI assistants.</li>
+        <li><a href="https://github.com/brainsparker/PromptLens" target="_blank" rel="noopener noreferrer">PromptLens</a> — A systematic evaluation framework for LLM prompts.</li>
+        <li><a href="https://sparker.co/free-mail-merge/" target="_blank" rel="noopener noreferrer">LabelMerge</a> — Private mail merge that runs entirely inside the browser.</li>
+      </ul>
+    </section>
 
-      <section id="about">
-        <div class="intro reveal"><h2>About</h2></div>
-
-        <div class="about reveal">
-          <div class="portrait">
-            <picture>
-              <source srcset="images/brian-sparker.webp" type="image/webp" />
-              <img src="images/brian-sparker.jpg" width="400" height="400" alt="Brian Sparker" loading="lazy" decoding="async" />
-            </picture>
-          </div>
-          <div>
-            <p>I’m Brian—a product leader who likes the messy middle, where new technology, user behavior, and business reality all bump into each other. I’m happiest turning a fuzzy idea into a clear plan, helping a team ship it, and staying close enough to the details to know if it actually works. I’ve spent most of my career around AI, search, growth, pricing, and developer tools. The common thread is simple: make complicated things genuinely useful.</p>
-            <p class="label">Staff Product Manager at You.com<br />MBA, Boston University</p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="reveal">
-        <h2>Got a messy problem? Let’s <em>talk.</em></h2>
-        <a class="email label" href="mailto:sparker@hey.com">Email me <span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="colophon label">
-        <span>© <span id="year">2026</span> Brian Sparker</span>
+    <section class="page section" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <div class="about">
+        <picture>
+          <source srcset="images/brian-sparker.webp" type="image/webp" />
+          <img src="images/brian-sparker.jpg" width="400" height="400" alt="Brian Sparker" loading="lazy" decoding="async" />
+        </picture>
         <div>
-          <a href="https://github.com/brainsparker">GitHub</a>
-          <a href="https://www.linkedin.com/in/bsparker/">LinkedIn</a>
-          <a href="https://sparker.co/llms.txt">LLMs.txt</a>
+          <p>I’m Brian—a product leader who likes the messy middle, where new technology, user behavior, and business reality all bump into each other. I’m happiest turning a fuzzy idea into a clear plan, helping a team ship it, and staying close enough to the details to know if it actually works.</p>
+          <p>I’ve spent most of my career around AI, search, growth, pricing, and developer tools. The common thread is simple: make complicated things genuinely useful.</p>
+          <p>Staff Product Manager at You.com<br />MBA, Boston University</p>
         </div>
       </div>
-    </footer>
-  </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page footer-inner">
+      <div>
+        <h2>Have a messy problem?</h2>
+        <p><a class="email-link" href="mailto:sparker@hey.com">Send me an email</a>.</p>
+      </div>
+      <p class="footer-meta">© <span id="year">2026</span> Brian Sparker · <a href="https://github.com/brainsparker" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/bsparker/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="/llms.txt">LLMs.txt</a></p>
+    </div>
+  </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('shown');
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px' });
-
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-    // Track outbound project clicks and email clicks.
-    document.querySelectorAll('.projects a, .email, .masthead a[href^="mailto:"]').forEach((link) => {
+    document.querySelectorAll('.project-list a').forEach((link) => {
       link.addEventListener('click', () => {
-        if (typeof gtag === 'undefined') return;
-        gtag('event', 'click', {
-          event_category: link.href.startsWith('mailto:') ? 'Connect' : 'Work',
-          event_label: link.querySelector('b')?.textContent.trim() || link.href
-        });
+        if (typeof gtag === 'function') {
+          gtag('event', 'click', {
+            event_category: 'Work',
+            event_label: link.textContent.trim()
+          });
+        }
       });
+    });
+
+    document.querySelector('.email-link')?.addEventListener('click', () => {
+      if (typeof gtag === 'function') {
+        gtag('event', 'click', {
+          event_category: 'Connect',
+          event_label: 'Email'
+        });
+      }
     });
   </script>
 </body>
